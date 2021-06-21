@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "lauracaroline",
+    "password": "laura789",
+    "database": "chat",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "lauracaroline",
+    "password": "laura789",
+    "database": "chat",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "lauracaroline",
+    "password": "laura789",
+    "database": "chat",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

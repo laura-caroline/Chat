@@ -59,6 +59,9 @@ Trata-se de uma aplicação que visa a troca de mensagens entre os usuários em 
 - [x] Abrir chat com determinado usuário
 - [x] Fazer o logout
 
+### Funcionalidades
+- [x] Se receber uma mensagem e não estiver no mesmo chat da pessoa que enviou ou estiver conversando com outra pessoa, aparecerá a quantidade de mensagens que foram enviadas e a mensagem na tela que lista os usuários.
+- [x] Armazena as mensagens no banco de dados mysql
 
 
 

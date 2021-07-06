@@ -2,7 +2,6 @@ import React, { useState, useRef, useCallback, useEffect } from 'react'
 import { RefreshControl } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { useNavigation } from '@react-navigation/native'
-import { useSelectedUser } from '../../context/user'
 import { useAuthenticate } from '../../context/authenticate'
 import api from '../../config/api'
 import socket from '../../services/socket'
@@ -16,31 +15,22 @@ import {
     MessageRecepted,
     MessageSendedByMe
 } from './styles'
-import { set } from 'react-native-reanimated'
 
 const Chat = () => {
-    //Estados
     const [messages, setMessages] = useState([])
     const [msg, setMsg] = useState({})
     const [refreshing, setRefreshing] = useState(false)
     const [offset, setOffset] = useState(0)
     const [posScroll, setPosScroll] = useState()
     const [dimensions, setDimensions] = useState({})
-    const [numberRenderization, setNumberRenderization] = useState(1)
-
-    // Hooks and contexts
-    const { setSelectedUser, selectedUser } = useSelectedUser()
     const { profile: { id } } = useAuthenticate()
     const navigation = useNavigation()
     const scrollViewRef = useRef();
-
-    navigation.addListener('beforeRemove', () => {
-        setSelectedUser('')
-    })
     
     const {
         to_user,
-        nicknameUserSelected
+        nicknameUserSelected,
+        selectedUser
     } = useRoute().params
 
     useEffect(() => {
@@ -64,10 +54,10 @@ const Chat = () => {
 
     useEffect(() => {
         socket.on('private_message', async data => {
-            const {content, from} = data
+            const {nickname,content, from} = data
 
             if (from === selectedUser) {
-                setMessages([...messages, { text: content }])
+                return setMessages([...messages, { text: content }])
             }
         })
     }, [messages])
@@ -101,11 +91,11 @@ const Chat = () => {
         })
     }
     const handleSendingMessage = () => {
-        socket.emit('private_message', msg)
-        setMessages([...messages, msg])
-        setMsg('')
-
-
+        if(msg){
+            socket.emit('private_message', msg)
+            setMessages([...messages, msg])
+            setMsg('')
+        }
     }
     return (
         <Container>

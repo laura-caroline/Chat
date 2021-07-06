@@ -15,13 +15,8 @@ const Drawer = createDrawerNavigator()
 
 const DrawerNavigation = () => {
     return(
-        <Drawer.Navigator
-            drawerStyle={{
-                width: '50%'
-            }}
-            drawerContent={(props) => <CustomDrawerComp {...props} />}>
+        <Drawer.Navigator drawerStyle={{width: '50%'}} drawerContent={(props) => <CustomDrawerComp {...props} />}>
             <Drawer.Screen name="ListUsers" component={ListUsers} />
-
         </Drawer.Navigator>
     )   
 }
@@ -32,7 +27,7 @@ const CustomDrawerComp = (props) => {
 
     const handleSignOut = async ()=>{
         await handleLogout()
-        socket.emit('disconnect')
+        socket.disconnect()
         return navigation.navigate('SignIn')
     }
 
@@ -40,7 +35,7 @@ const CustomDrawerComp = (props) => {
         <DrawerContentScrollView {...props}>
             <View>
                 <DrawerItem  
-                    label={`Usuário: ${socket.auth.nickname}`}
+                    label={`Usuário: ${socket.auth?.nickname}`}
                 />
                 <DrawerItem
                     label="Sair"

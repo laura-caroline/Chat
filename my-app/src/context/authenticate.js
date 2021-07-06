@@ -16,12 +16,13 @@ export const AuthenticateProvider = ({children})=>{
             const getToken = await AsyncStorage.getItem(keyAuth)
             if(getToken){
                 api.defaults.headers.Authorization = `Bearer ${getToken}`
-                const {token} = await api.get('/check-token')
+                const {token} = await api.get('/auth')
                 if(token){
                     const dataProfile = JSON.parse(await AsyncStorage.getItem(keyProfiles))
                     setProfile(dataProfile)
                     return setAuthenticate(true)
                 }
+                setAuthenticate(false)
                 await AsyncStorage.removeItem(keyAuth)
                 await AsyncStorage.removeItem(keyProfiles)            
             }
@@ -39,6 +40,7 @@ export const AuthenticateProvider = ({children})=>{
     }
 
     const handleLogout = async ()=>{
+        setAuthenticate(false)
         await AsyncStorage.removeItem('auth')
     }
 

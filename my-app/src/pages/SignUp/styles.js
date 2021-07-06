@@ -29,9 +29,12 @@ export const BoxPhoto = styled.View`
 `
 export const Photo = styled.Image`
     width: 100%;
-    height: 235px;
+    height: 200px;
 `
 export const ButtonSubmit = styled.Button`
     width: 50%;
 `   
-export const BoxForm = styled.View``
+export const BoxForm = styled.View`
+    
+
+`

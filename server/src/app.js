@@ -13,7 +13,6 @@ const MessageServices = require('./services/messageServices')
 
 // Configurações
 
-app.use(express.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
@@ -39,7 +38,6 @@ io.on("connection", socket => {
             amountMessagesUnreads: 0
         })
     }
-    console.log(users_connected)
 
     // send to the client_side the users connected in socket
     io.emit('users_connected', users_connected)

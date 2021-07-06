@@ -5,8 +5,4 @@ const socket = io('http://192.168.1.48:8080/', {
     transports: ['websocket']
 })
 
-
-
-
-
 export default socket

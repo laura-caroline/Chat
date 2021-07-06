@@ -1,18 +1,15 @@
 const MessageServices = require("../services/messageServices");
 
-
 class MessageControllers{
-    static async readMessage(req, res){
-        const {from_user, to_user, offset} = req.query
+    static async readMessage(request, response){
+        const {from_user, to_user, offset} = request.query
         try{
-            const response = await MessageServices.readMessage({from_user, to_user, offset})
-            return res.status(200).send(response)
+            const messages = await MessageServices.readMessage({from_user, to_user, offset})
+            return response.status(200).send(messages)
         }
         catch(err){
-            return res.status(400).send({error: 'Algo deu errado, tente novamente mais tarde'})
+            return response.status(400).send({error: 'Algo deu errado, tente novamente mais tarde'})
         }
-
-
     }
 }
 

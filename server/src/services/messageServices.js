@@ -3,7 +3,7 @@ const { Op } = require('sequelize')
 
 
 class MessageServices {
-    static async readMessage({ from_user, to_user, offset = 0 }) {
+    static async readMessage({ from_user, to_user, offset = 0,}) {
         
         const response = await message.findAll({
             where: {
